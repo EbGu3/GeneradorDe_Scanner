@@ -1,14 +1,16 @@
 ﻿using System;
 namespace GeneradorDeScanner.Models
 {
+    
+   
     public class Nodo
     {
-        public string Key { get; set; }
+       
+        public string _key { get; set; }
         public Nodo Derecho, Izquierdo;
 
-        public Nodo(string key)
+        public Nodo()
         {
-            Key = key;
             Derecho = Izquierdo = null;
         }
 
@@ -18,7 +20,7 @@ namespace GeneradorDeScanner.Models
     {
 
         public Nodo Root { get; set; }
-        public bool Insertado= false; 
+       
 
         public ArbolBinario()
         {
@@ -34,27 +36,40 @@ namespace GeneradorDeScanner.Models
         {
             if(Root == null)
             {
-                Root = new Nodo(root.Key);
+
+                Root = new Nodo
+                {
+                    _key = root._key,
+                    Derecho = root.Derecho,
+                    Izquierdo = root.Izquierdo
+                };
+                
                 direccion = 0;
                 return Root;
                 
             }
+            
 
             else if(direccion == 1)
             {
                 Root.Derecho = Recursivo(Root.Derecho, 1, root);
-                Insertado = false;
+                
             }
             else if(direccion == 2)
             {
                 Root.Izquierdo = Recursivo(Root.Izquierdo, 2, root);
-                Insertado = false;
+                
             }
 
             return Root;
         }
 
+        public Nodo Retornar()
+        {
+            return Root;
+        }
 
+        
 
 
     }
