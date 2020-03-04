@@ -121,7 +121,7 @@ namespace GeneradorDeScanner.Models
                     ArbolBinario Temp = new ArbolBinario();
                     //0 raiz, 1 derecho, 2 izquierdo
                     Temp.Insertar(NodoB, 0);
-                    if (PilaS.Count < 0)
+                    if (PilaS.Count < 2)
                     {
                         Console.WriteLine("Error, Falta de operandos");
                     }
@@ -162,7 +162,7 @@ namespace GeneradorDeScanner.Models
                     }
                     if (PilaS.Count < 2)
                     {
-                        Console.WriteLine("Error por falta de operenados");
+                        Console.WriteLine("Error por falta de operenados el tamaño de la PilaS es menor a 2");
                     }
                     else
                     {

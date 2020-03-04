@@ -47,41 +47,55 @@ namespace GeneradorDeScanner.Models
 
         public void Lectura()
         {
-            using (var FileStream = new FileStream(Ruta, FileMode.Open))
+            try
             {
-                using(var StreamReader = new StreamReader(FileStream))
+                using (var FileStream = new FileStream(Ruta, FileMode.Open))
                 {
-                    Console.WriteLine("Se ingreso el archivo");
-
-
-                    var LineaRegistrada = new string[1];
-                    var Datosleidos = "";
-
-                    Datosleidos = StreamReader.ReadLine();
-                    LineaRegistrada = Datosleidos.Split(' ');
-
-                    while(Datosleidos != null)
+                    using (var StreamReader = new StreamReader(FileStream))
                     {
-                        if(LineaRegistrada[0].ToString() == "SETS")
-                        {
-                            Console.WriteLine("Este archivo contiene sets");
+                        Console.WriteLine("Se ingreso el archivo");
 
-                            _arbolExpresion.Insertar(LineaRegistrada[0], ' ', false);
-                            Datosleidos = StreamReader.ReadLine();
-                            
-                        }
-                        else
+                        var Posicion = 0;
+                        var LineaRegistrada = new string[1];
+                        var Datosleidos = "";
+
+                        Datosleidos = StreamReader.ReadLine();
+                        LineaRegistrada = Datosleidos.Split(' ');
+
+                        while (Datosleidos != null)
                         {
-                            Console.WriteLine("No contiene sets");
-                            _arbolExpresion.Insertar(null, Convert.ToChar(LineaRegistrada[0]), false);
+                            if (Posicion < LineaRegistrada.Length)
+                            {
+                                if (LineaRegistrada[Posicion].ToString() == "SETS")
+                                {
+                                    Console.WriteLine("Este archivo contiene sets");
+                                    Console.WriteLine(LineaRegistrada[Posicion].ToString());
+
+                                    Datosleidos = StreamReader.ReadLine();
+
+                                }
+                                else
+                                {
+
+                                    Console.WriteLine(LineaRegistrada[Posicion].ToString());
+                                    Datosleidos = StreamReader.ReadLine();
+
+                                }
+                                Posicion++;
+
+                            }
+                            Posicion = 0;
+                            LineaRegistrada[Posicion] = Datosleidos;
                         }
+
                     }
-                    
-                 
-
-
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No ingreso correctamente el archivo");
+            }
+            
         }
 
 
@@ -108,96 +122,15 @@ namespace GeneradorDeScanner.Models
 
             }
         }
-        /*public void LecturaER()
-        {
-            var ERS = "[[(SETS) · (\n+) · (“ “*)]· [(\n+) · (“ ”+)] ·[ [(id) · (“ ”+) · = · (“ ”+)]· [ (  ‘ · My · ‘+) · \\+ · (  ‘ · Mi · ‘+ ) · \\+ · (‘·Others·‘) ] |[ (  ‘ · My · ‘ +) · \\+ · (  ‘ · Mi · ‘ +)]   |  [((‘·N4·‘+)]|[(‘· N4·‘+)  ·\\+ · ( ‘·Mi·‘ +)]|[(‘· N4·‘+)  ·\\+ · ( ‘·My·‘ +) ]|[ (CHR · \\( · (N1?) · N2 · N3 · \\) ) + ) ] +]?]·#";
-
-            string[] LineaLeida = new string[1];
-            char[] spl = new char[2] { '[', ']' };
-            LineaLeida = ERS.Split(spl);
-            bool EsOp = false;
-            var i = 0;
-            var o = 0;
-            var c = 0;
-            var o1 = 0;
-            var c1 = 0;
-            string Palabra = "";
-
-            
-            while(i < LineaLeida.Length)
-            {
-                if(LineaLeida[i] != "")
-                {
-                    char[] a = new char[LineaLeida[i].Length];
-                    a = (LineaLeida[i]).ToCharArray();
-                    
-                    while((o <= oper.Length) && (EsOp == false))
-                    {
-                        if(a[o1] == oper[o])
-                        {
-                            _arbolExpresion.Insertar(null, a[o1]);
-                            o1++;
-                            EsOp = true;
-                        }
-                        o++;
-                    }
-                    c1 = o1++; 
-                    while(c < My.Length)
-                    {
-                        if((a[c1] == My[c])|(a[c1] == Mi[c]))
-                        {
-                            if(Palabra == "SETS" | Palabra == "My" | Palabra == "Mi" | Palabra == "N1" | Palabra == "N2" | Palabra == "N3")
-                            {
-
-                            }
-                            else
-                            {
-                                Palabra += a[i];
-                                c1++;
-                            }
-
-
-                        }
-                        else if(c <= Others.Length)
-                        {
-                            if(a[c1] == Others[i])
-                            {
-                                Console.WriteLine(a[c1].ToString());
-                            }
-                            
-                        }
-
-                        if()
-                        c++;
-                    }
-
-
-                    
-                }
-                i++;
-               
-                
-                o = 0;
-                c = 0;
-                
-                
-            }
-            
-
-
-
-
-         
-
-            
-
-         
-        }*/
 
         public void LecturaER()
         {
-            var ERS = "[[(SETS)·(\n+)·( +)][·(\n+)·( +)][·(id)·( +)·=·( +)][·(‘·My·‘+)·\\+·(‘·Mi·‘+)·\\+·(‘·Others·‘)][|(‘·My·‘+)·\\+·(‘·Mi·‘+)][|((‘·N4·‘+)][|(‘·N4·‘+)·\\+·(‘·Mi·‘+)][|(‘·N4·‘+)·\\+·(‘·My·‘+)][|(CHR·\\(·(N1?)·N2·N3·\\))+)]+]?]·#";
+            //var ERS = "[[(SETS)·(\n+)·( +)][·(\n+)·( +)][·(id)·( +)·=·( +)][·(‘·My·‘+)·\\+·(‘·Mi·‘+)·\\+·(‘·Others·‘)][|(‘·My·‘+)·\\+·(‘·Mi·‘+)][|((‘·N4·‘+)][|(‘·N4·‘+)·\\+·(‘·Mi·‘+)][|(‘·N4·‘+)·\\+·(‘·My·‘+)][|(CHR·\\(·(N1?)·N2·N3·\\))+)]+]?]·#";
+            //var ERS = "[[[(SETS)·(\n+)·( *)][·(\n)·(+)·(id)·n( +)·=·( +)][·(‘·My·‘+)·\\+·(‘·Mi·‘+)·\\+·(‘·N4·‘)|(‘·My·‘+)·\\+·(‘·Mi·‘+)|((‘·N4·‘+)|(‘·N4·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)·\\+·(‘·My·‘+)|(CHR·\\(·(N1?)·N2·N3·\\)+)]·+]·?]·#";
 
+            //var ERS = "((((SETS)·(\n+)·(*))(((·\n· +·id· +·=· +)(·(‘·My·‘+)·\\+·(‘·Mi·‘+)·\\+·(‘·_·‘)|(‘·My·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)|(CHR·\\(·(N1?)·N2·N3·\\))+)·+))·?)·#";
+
+            var ERS = "(([SETS)·(\n+)·(+)]((·\n· +·id· +·=· +·(‘·My·‘+)·\\+·(‘·Mi·‘+)·\\+·(‘·_·‘)|(‘·My·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)|(CHR·\\(·(N1?)·N2·N3·\\))+)·+)·?)·#";
             string[] LineaLeida = new string[1];
             char[] spl = new char[2] { '[', ']' };
             LineaLeida = ERS.Split(spl);
@@ -236,7 +169,7 @@ namespace GeneradorDeScanner.Models
                         {
                             EsOp = false;
                         }
-                        if ((Operadores.ContainsValue(a[o1]) == true) && (EsOp == true))
+                        if ((o1 < a.Length - 1) && ((Operadores.ContainsValue(a[o1]) == true) && (EsOp == true)))
                         {
                             _arbolExpresion.Insertar(null, a[o1], Ultimo);
                             EsOp = false;
@@ -294,7 +227,7 @@ namespace GeneradorDeScanner.Models
                            
 
                         }
-                        else if(Operadores.ContainsValue(a[o1]) == true)
+                        else if((o1 < a.Length - 1) && (Operadores.ContainsValue(a[o1]) == true))
                         {
                             EsOp = true;
                             o1 = c1;
