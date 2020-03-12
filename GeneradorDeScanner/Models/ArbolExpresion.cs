@@ -27,12 +27,13 @@ namespace GeneradorDeScanner.Models
             PilaS = new Stack<Nodo>();
             PilaT = new Stack<char>();
             Una = new char[3] { '+', '*', '?'};
-            NoUna = new char[3] {' ', '|', '·' };
+            NoUna = new char[2] { '|', '·' };
             Oper = new char[11] { '·', '|', '$', '^', '?', '+', '*', '(', ')', '[', ']' };
             Unarios = new Dictionary<int, char>();
             NoUnarios = new Dictionary<int, char>();
             Operadores = new Dictionary<char, int>();
             ultimo = false;
+            st = "sivneptuar1234qcm";
            
             
         }

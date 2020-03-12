@@ -130,7 +130,8 @@ namespace GeneradorDeScanner.Models
 
             //var ERS = "((((SETS)·(\n+)·(*))(((·\n· +·id· +·=· +)(·(‘·My·‘+)·\\+·(‘·Mi·‘+)·\\+·(‘·_·‘)|(‘·My·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)|(CHR·\\(·(N1?)·N2·N3·\\))+)·+))·?)·#";
 
-            var ERS = "(([SETS)·(\n+)·(+)]((·\n· +·id· +·=· +·(‘·My·‘+)·\\+·(‘·Mi·‘+)·\\+·(‘·_·‘)|(‘·My·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)·\\+·(‘·Mi·‘+)|(‘·N4·‘+)|(CHR·\\(·(N1?)·N2·N3·\\))+)·+)·?)·#";
+            var ERS = "(s.(e.i.(v|p|m|c)+)+)?.t.(u.n.i.(e|m|v|1|2|3|4|r)+)+.a.r.1.2.3.(n.i.v)+.4.(e.1.2.3.(n.i.v)+.4)*.(q.i.n)+";
+;
             string[] LineaLeida = new string[1];
             char[] spl = new char[2] { '[', ']' };
             LineaLeida = ERS.Split(spl);
